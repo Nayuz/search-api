@@ -19,3 +19,21 @@ class Trademark(BaseModel):
     asignProductMainCodeList: Optional[List[str]]   #상품 주 분류 코드 리스트
     asignProductSubCodeList: Optional[List[str]]    #상품 유사군 코드 리스트
     viennaCodeList: Optional[List[str]]     #비엔나 코드 리스트
+
+class SearchQuery(BaseModel):
+    productName: Optional[str] = None
+    productNameEng: Optional[str] = None
+    applicationNumber: Optional[str] = None
+    applicationDate: Optional[str] = None
+    registerStatus: Optional[str] = None
+    publicationNumber: Optional[str] = None
+    publicationDate: Optional[str] = None
+    registrationNumber: Optional[str] = None
+    registrationDate: Optional[str] = None
+    internationalRegNumbers: Optional[str] = None
+    internationalRegDate: Optional[str] = None
+    priorityClaimNumList: Optional[List[str]] = None
+    priorityClaimDateList: Optional[List[str]] = None
+    asignProductMainCodeList: Optional[List[str]] = None
+    asignProductSubCodeList: Optional[List[str]] = None
+    viennaCodeList: Optional[List[str]] = None
