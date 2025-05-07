@@ -28,23 +28,28 @@ def load_data(dir :str = "data") -> List[Trademark]:
             with open(filepath, encoding='utf-8') as file:
                 raw = json.load(file)
                 for item in raw:
+                    # 모든 필드에 None이 있을 수 있다고 생각하고 체크
+                    for key, value in item.items():
+                        if isinstance(value, list):
+                            item[key] = [x for x in value if x is not None]
+                            if not item[key]:
+                                item[key] = None
+                        elif value is None:
+                            item[key] = None
                     result.append(Trademark(**item))
     return result
     
 def filter_trademark(data: List[Trademark], query: SearchQuery) -> List[Trademark]:
     result = []
     for item in data:
-        match = True
+        match = False
         for field, value in query.model_dump(exclude_none=True).items():
-            item_value = getattr(item, field)
+            item_value = getattr(item, field, None)
             if isinstance(value, list):
-                if not item_value or not any(single_value in item_value for single_value in value):
-                    match = False
+                #None이 아니고, 값이 일치하는 경우 True로
+                if item_value is not None and any(v in item_value for v in value):
+                    match = True
                     break
-                else:
-                    if item_value != value:
-                        match = False
-                        break
-            if match:
-                result.append(item)
+        if match:
+            result.append(item)
     return result

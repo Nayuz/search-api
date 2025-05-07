@@ -19,7 +19,7 @@ app = FastAPI(lifespan=lifespan)
 
 
 # 라우터 등록
-app.include_router(endpoint.router, prefix="/search")
+app.include_router(endpoint.router)
 
 
 
