@@ -51,3 +51,23 @@ python 3.12 기준, deprecated 된 코드는 가능한 피해서 작성하는것
 data가 단일 파일인 경우를 고려하여 작성했지만,
 
 이후에 데이터가 늘어날 것을 고려해서 해당 경로 안의 '.json' 확장자 파일 전부를 로드하는것으로 작성.
+
+---
+
+항목과 항목의 내용을 JSON방식으로 채워서 POST /search 에 요청하면 답을 받을 수 있음.
+
+
+---
+
+POST /search 의 경우, JSON으로 모든 항목을 동시에 검색할 수 있지만 검색하는데에 조금 번거로움이 있음.
+
+그러므로 GET /search/productname, GET /search/applicationnumber 등으로 나누어 결과물을 받는 API를 조금 더 편리하게 호출해보고자 함.
+
+결과
+
+GET /search/productname, GET /search/applicationnumber, GET /search/resisterstatus, GET /search/internationnumber
+
+요청하면 해당 항목을 포함한 결과를 검색해 보여줌.
+
+---
+

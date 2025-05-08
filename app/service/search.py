@@ -1,6 +1,7 @@
 import os
 import json
 from typing import List
+from datetime import datetime
 from app.schema.search import Trademark, SearchQuery
 
 # 단일 파일일 경우, path의 파일을 불러와 로드하는 코드
@@ -52,4 +53,23 @@ def filter_trademark(data: List[Trademark], query: SearchQuery) -> List[Trademar
                     break
         if match:
             result.append(item)
+    return result
+
+# field : applicationDate, publicationDate, registrationDate, internationalRegDate
+def filter_trademark_by_date(data:List[Trademark],
+                             field:str,
+                             start_date:str,
+                             end_date:str) -> List[Trademark]:
+    result = []
+
+    start = datetime.strptime(start_date, "%Y%m%d")
+    end = datetime.strptime(end_date, "%Y%m%d")
+
+    for item in data:
+        item_value = getattr(item, field, None)
+
+        if item_value:
+            item_date = datetime.strptime(item_value, "%Y%m%d")
+            if start <= item_date <= end:
+                result.append(item)
     return result
