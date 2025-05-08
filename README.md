@@ -50,6 +50,8 @@ python 3.12 환경에서 실행되도록 작성된 코드입니다.
 
 pytyon 3.12 환경을 준비한 상태에서
 
+이 프로그램 하위경로인 data 폴더에 데이터 json파일들을 집어넣습니다.
+
 cmd 창을 띄운 뒤, search-api 경로에서 pip install -r requirements.txt를 입력해 필요한 모듈을 설치합니다.
 
 이후 같은 경로에서 uvicorn app.main:app --reload 를 입력하여 FastAPI 서버를 실행합니다.
