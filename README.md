@@ -1,5 +1,9 @@
 # search-api
 
+
+
+
+
 데이터셋 컬럼 정의
 - productName: 상표명(한글)
 - productNameEng: 상표명(영문)
@@ -38,6 +42,19 @@
 > 코드의 효율성과 가독성을 높이기 위해 노력해주세요.
 
 
+---
+
+## 실행방법
+
+python 3.12 환경에서 실행되도록 작성된 코드입니다.
+
+pytyon 3.12 환경을 준비한 상태에서
+
+cmd 창을 띄운 뒤, search-api 경로에서 pip install -r requirements.txt를 입력해 필요한 모듈을 설치합니다.
+
+이후 같은 경로에서 uvicorn app.main:app --reload 를 입력하여 FastAPI 서버를 실행합니다.
+
+아랫부분에 GET, POST의 API들이 서술되어있습니다. 참고하시기 바랍니다.
 
 
 ---
@@ -67,7 +84,23 @@ POST /search 의 경우, JSON으로 모든 항목을 동시에 검색할 수 있
 
 GET /search/productname, GET /search/applicationnumber, GET /search/resisterstatus, GET /search/internationnumber
 
+?query=(내용입력)
+
 요청하면 해당 항목을 포함한 결과를 검색해 보여줌.
 
 ---
 
+날짜에 대해서는 구간을 검색할 수 있는게 좋다고 판단,
+
+GET /search/applicationdate, GET /search/publicationdate, GET /search/registrationdate, GET /search/internationalregdate 추가.
+
+?start_date=YYYYMMDD&end_date=YYYYMMDD 입력시 해당 구간 사이에 등록된 정보를 찾아옴.
+
+
+---
+
+### 개선안
+
+처음 서버를 실행할 때, 중복되는 데이터가 있다면 중복을 제거하고 캐싱하는쪽이 더 좋을 것 같다고 생각합니다.
+
+현재는 검색어가 완전히 일치해야만 검색결과가 나오지만, 검색어를 포함한 정보가 있다면 검색결과에 포함하여 반환하게끔 하고 싶습니다.
